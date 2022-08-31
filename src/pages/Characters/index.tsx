@@ -1,65 +1,47 @@
-import { Button, Card, Container } from "react-bootstrap";
-import imageTeste from "../../assets/teste.jpg";
+import { useEffect, useState } from "react";
+import { Button, Card, Container, Modal } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { BoxBorder } from "../../components/BoxBorder";
 
 export function Characters() {
+  const { id } = useParams()
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [repositoriesCharacters, setRepositoriesCharacters] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://swapi.dev/api/people/`).then(response => response.json()).then(data => setRepositoriesCharacters(data))
+  }, []);
+
+  const characters = repositoriesCharacters.result
+
+  const handleClose = () => setIsModalVisible(false);
+  const handleOpenModal = () => setIsModalVisible(true);
+
   return (
     <Container>
-      <section className="py-4 py-lg-5 containter">
-        <div className="row justify-content-center align-item-center">
-          <div className="col-11 col-md-6 col-lg-3 mx-0 mb-4">
-            <Card style={{ width: '18rem' }}>
-              <Card.Img variant="top" src={imageTeste} />
-              <Card.Body>
-                <Card.Title>Luke Skywallker</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up the
-                  bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Detalhes</Button>
-              </Card.Body>
-            </Card>
-          </div>
-          <div className="col-11 col-md-6 col-lg-3 mx-0 mb-4">
-            <Card style={{ width: '18rem' }}>
-              <Card.Img variant="top" src={imageTeste} />
-              <Card.Body>
-                <Card.Title>Luke Skywallker</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up the
-                  bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Detalhes</Button>
-              </Card.Body>
-            </Card>
-          </div>
-          <div className="col-11 col-md-6 col-lg-3 mx-0 mb-4">
-            <Card style={{ width: '18rem' }}>
-              <Card.Img variant="top" src={imageTeste} />
-              <Card.Body>
-                <Card.Title>Luke Skywallker</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up the
-                  bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Detalhes</Button>
-              </Card.Body>
-            </Card>
-          </div>
-          <div className="col-11 col-md-6 col-lg-3 mx-0 mb-4">
-            <Card style={{ width: '18rem' }}>
-              <Card.Img variant="top" src={imageTeste} />
-              <Card.Body>
-                <Card.Title>Luke Skywallker</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up the
-                  bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Detalhes</Button>
-              </Card.Body>
-            </Card>
-          </div>
-        </div>
-      </section>
+      <BoxBorder>
+        <>
+          <Card style={{ width: '18rem' }}>
+            <Card.Body>
+              <Card.Title></Card.Title>
+              <Card.Text>
+                Some quick example text to build on the card title and make up the
+                bulk of the card's content.
+              </Card.Text>
+              <Button onClick={handleOpenModal} variant="primary">Detalhes</Button>
+            </Card.Body>
+          </Card>
+        </>
+
+      </BoxBorder>
+
+
+      <Modal show={isModalVisible} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Detalhes do personagem</Modal.Title>
+        </Modal.Header>
+      </Modal>
+
     </Container>
   );
 }

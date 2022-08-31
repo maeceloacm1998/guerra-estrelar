@@ -1,4 +1,5 @@
 import {Routes, Route } from 'react-router-dom';
+
 import { Characters } from '../pages/Characters';
 import { Spaceships } from '../pages/Spaceship';
 import { Weapons } from '../pages/Weapons';
