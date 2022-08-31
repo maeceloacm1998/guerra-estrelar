@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
-
+import styles from './Header.module.css';
 import { Button, Container, Nav, Navbar, NavItem } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export function Header() {
-  return (
+  console.log(styles)
+   return (
     <>
-      <Navbar bg="dark" variant="dark">
+      <Navbar className={styles.header}  variant="dark">
         <Container >
           <Navbar.Collapse>
             <Navbar.Brand href="#home">Guerra Estrelar</Navbar.Brand>

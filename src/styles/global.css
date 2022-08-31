@@ -9,7 +9,7 @@
 }
 
 body {
-
+  background: var(--primary);
   -webkit-font-smoothing: antialiased;
 }
 
